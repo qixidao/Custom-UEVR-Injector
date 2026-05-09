@@ -1,4 +1,4 @@
-name: Build .NET Framework 4.7.2
+name: Build Custom-UEVR-Injector
 
 on:
   push:
@@ -14,19 +14,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Add MSBuild to PATH
+      - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
 
+      - name: Setup NuGet
+        uses: nuget/setup-nuget@v1
+
       - name: Restore NuGet packages
-        run: nuget restore
+        run: nuget restore GUI/Custom_UEVR_Injector.sln
 
-      - name: Build with MSBuild (Release x64)
-        run: msbuild /t:Rebuild /p:Configuration=Release /p:Platform=x64
+      - name: Build Solution
+        run: msbuild GUI/Custom_UEVR_Injector.sln /t:Build /p:Configuration=Release /p:Platform=x64
 
-      - name: Upload compiled files
+      - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: Custom-UEVR-Injector
           path: |
-            **/bin/x64/Release/*.exe
-            **/bin/x64/Release/*.dll
+            GUI/bin/x64/Release/*.exe
+            GUI/bin/x64/Release/*.dll
