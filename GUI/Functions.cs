@@ -154,14 +154,6 @@ namespace Custom_UEVR_Injector
                     File.WriteAllText(configFilePath, "");
                     form.listResults.AppendText("[LOG] cvars_standard.txt Created." + Environment.NewLine);
                 }
-
-                configFilePath = Path.Combine(profile_path, "user_script.txt");
-
-                if (!File.Exists(configFilePath))
-                {
-                    File.WriteAllText(configFilePath, "");
-                    form.listResults.AppendText("[LOG] user_script.txt Created." + Environment.NewLine);
-                }
             }
             catch (Exception ex)
             {
@@ -213,19 +205,6 @@ namespace Custom_UEVR_Injector
                     if (parts.Length == 2)
                     {
                         cvars_standard_data[parts[0].Trim()] = parts[1].Trim();
-                    }
-                }
-				
-			/* user_script.txt */
-            configPath = Path.Combine(profile_path,"user_script.txt");
-			if (!File.Exists(configPath)) return;
-
-                foreach (var line in File.ReadLines(configPath))
-                {
-                    string[] parts = line.Split(' ');
-                    if (parts.Length == 2)
-                    {
-                        user_script_data[parts[0].Trim()] = parts[1].Trim();
                     }
                 }
 					
@@ -339,91 +318,6 @@ namespace Custom_UEVR_Injector
                 Slides.ScreenPercentage.Slider.Value = spValue;
             }
 
-            /* user_script.txt */
-
-            if (TryGetString(user_script_data, "sg.ResolutionQuality", out var slide_ResolutionQuality)
-             && float.TryParse(slide_ResolutionQuality, NumberStyles.Float, CultureInfo.InvariantCulture, out var rqValue))
-            {
-                Slides.ResolutionQuality.Slider.Value = rqValue;
-            }
-
-            if (TryGetString(user_script_data, "sg.ViewDistanceQuality", out var slide_ViewDistanceQuality)
-             && int.TryParse(slide_ViewDistanceQuality, out var vdqValue))
-            {
-                Slides.ViewDistanceQuality.Slider.Value = vdqValue;
-            }
-
-            if (TryGetString(user_script_data, "sg.AntiAliasingQuality", out var slide_AntiAliasingQuality)
-                && int.TryParse(slide_AntiAliasingQuality, out var aaValue))
-            {
-                Slides.AntiAliasingQuality.Slider.Value = aaValue;
-            }
-
-            if (TryGetString(user_script_data, "sg.PostProcessQuality", out var slide_PostProcessQuality)
-                && int.TryParse(slide_PostProcessQuality, out var ppValue))
-            {
-                Slides.PostProcessQuality.Slider.Value = ppValue;
-            }
-
-            if (TryGetString(user_script_data, "sg.ShadowQuality", out var slide_ShadowQuality)
-                && int.TryParse(slide_ShadowQuality, out var shValue))
-            {
-                Slides.ShadowQuality.Slider.Value = shValue;
-            }
-
-            if (TryGetString(user_script_data, "sg.TextureQuality", out var slide_TextureQuality)
-                && int.TryParse(slide_TextureQuality, out var txValue))
-            {
-                Slides.TextureQuality.Slider.Value = txValue;
-            }
-
-            if (TryGetString(user_script_data, "sg.EffectsQuality", out var slide_EffectsQuality)
-                && int.TryParse(slide_EffectsQuality, out var efValue))
-            {
-                Slides.EffectsQuality.Slider.Value = efValue;
-            }
-
-            if (TryGetString(user_script_data, "sg.FoliageQuality", out var slide_FoliageQuality)
-                && int.TryParse(slide_FoliageQuality, out var flValue))
-            {
-                Slides.FoliageQuality.Slider.Value = flValue;
-            }
-
-            if (TryGetString(user_script_data, "sg.ShadingQuality", out var slide_ShadingQuality)
-                && int.TryParse(slide_ShadingQuality, out var sdValue))
-            {
-                Slides.ShadingQuality.Slider.Value = sdValue;
-            }
-
-            if (TryGetString(user_script_data, "sg.ReflectionQuality", out var slide_ReflectionQuality)
-                && int.TryParse(slide_ReflectionQuality, out var rqValue2))
-            {
-                Slides.ReflectionQuality.Slider.Value = rqValue2;
-            }
-
-            if (TryGetString(user_script_data, "r.VSync", out var slide_VSync)
-                && int.TryParse(slide_VSync, out var vsValue))
-            {
-                Slides.VSync.Slider.Value = vsValue;
-            }
-
-            if (TryGetString(user_script_data, "r.VolumetricCloud", out var slide_VolumetricCloud)
-                && int.TryParse(slide_VolumetricCloud, out var vcValue))
-            {
-                Slides.VolumetricCloud.Slider.Value = vcValue;
-            }
-
-            if (TryGetString(user_script_data, "sg.GlobalIlluminationQuality", out var slide_GlobalIlluminationQuality)
-                && int.TryParse(slide_GlobalIlluminationQuality, out var giValue))
-            {
-                Slides.GlobalIlluminationQuality.Slider.Value = giValue;
-            }
-
-            if (TryGetString(user_script_data, "r.ReflectionMethod", out var slide_ReflectionMethod)
-                && int.TryParse(slide_ReflectionMethod, out var rmValue))
-            {
-                Slides.ReflectionMethod.Slider.Value = rmValue;
-            }
 
         }
 
@@ -466,22 +360,8 @@ namespace Custom_UEVR_Injector
             config_txt_data["VR_RenderingMethod"] = "0";
             config_txt_data["VR_ShowFPSOverlay"] = "true";
 
-            cvars_standard_data["Core_r.ScreenPercentage"] = "99.99";
+            cvars_standard_data["Core_r.ScreenPercentage"] = "100";
 
-            user_script_data["sg.ResolutionQuality"] = "99.99";
-            user_script_data["sg.ViewDistanceQuality"] = "2";
-            user_script_data["sg.AntiAliasingQuality"] = "2";
-            user_script_data["sg.PostProcessQuality"] = "2";
-            user_script_data["sg.ShadowQuality"] = "2";
-            user_script_data["sg.TextureQuality"] = "2";
-            user_script_data["sg.EffectsQuality"] = "2";
-            user_script_data["sg.FoliageQuality"] = "2";
-            user_script_data["sg.ShadingQuality"] = "2";
-            user_script_data["sg.ReflectionQuality"] = "2";
-            user_script_data["r.VSync"] = "1";
-            user_script_data["r.VolumetricCloud"] = "0";
-            user_script_data["sg.GlobalIlluminationQuality"] = "2";
-            user_script_data["r.ReflectionMethod"] = "0";
 
         }
 		
